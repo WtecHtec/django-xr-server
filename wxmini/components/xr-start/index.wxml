@@ -1,4 +1,4 @@
-<xr-scene ar-system="modes:Plane" bind:ready="handleReady">
+<xr-scene ar-system="modes:Plane" bind:ready="handleReady" bind:tick="handleTick">
 		<xr-assets bind:loaded="handleAssetsLoaded">
 				<xr-asset-load type="gltf" asset-id="anchor" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/ar-plane-marker.glb" />
 				<xr-asset-load type="gltf" asset-id="miku" src="https://mmbizwxaminiprogram-1258344707.cos.ap-guangzhou.myqcloud.com/xr-frame/demo/miku.glb" />
