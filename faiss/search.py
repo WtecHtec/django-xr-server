@@ -120,5 +120,5 @@ def get_image_similar(path_image):
     return rows
 
 if __name__ == '__main__':
-    path_image = './target/qr-code.png'
+    path_image = './target/demo1.png'
     get_image_similar(path_image)

@@ -1,18 +1,11 @@
 from os import abort
 import pymysql
 
-# HOSTNAME = '9.134.163.223'
-# USERNAME = 'root'
-# PASSWORD = 'Apc@portal168'
-# DATABASE_NAME = 'minixr'
-# PORT = 3306
-
-HOSTNAME = '1.116.139.149'
+HOSTNAME = '9.134.163.223'
 USERNAME = 'root'
-PASSWORD = 'oneX8748'
-DATABASE_NAME = 'web_note'
+PASSWORD = 'Apc@portal168'
+DATABASE_NAME = 'minixr'
 PORT = 3306
-
 
 
 def get_postgres_connection():
