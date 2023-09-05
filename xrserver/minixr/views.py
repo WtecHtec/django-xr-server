@@ -2,9 +2,11 @@ import base64
 import json
 import os
 import uuid
+from google.protobuf import json_format
+import json
+import numpy as np
+
 from django.conf import settings
-
-
 from django.forms.models import model_to_dict
 from django.core import serializers
 from django.http import HttpResponse
@@ -12,6 +14,9 @@ from django.http import HttpResponseRedirect
 
 from minixr.forms import XrMaterialsForm
 from .models import XrMaterials
+
+from .proto import user_pb2
+
 
 
 def index(request):
@@ -35,7 +40,6 @@ def upload_avatar(request):
         print(Exception)
         return HttpResponse( "Error", status=201)
   return HttpResponse( "No Request", status=404)
-
 
 #  识别
 def identify_ocr(request):
@@ -72,4 +76,47 @@ def identify_ocr(request):
       return HttpResponse(json.dumps(result), status= 200)
     else:
      return HttpResponse( "图片格式错误", status=201)
+  return HttpResponse( "No Request", status=404)
+
+
+
+def test_protobf(request):
+  if request.method == 'POST':
+      postBody = request.body
+      print(postBody)
+     
+      # json_result = json.loads(postBody)
+      # print(json_result)
+      # print(json_result['data'])
+      # 假设 uint8array 是一个 numpy 数组
+
+      # uint8array = np.array([2, 4, 66, 105, 108, 108, 8, 30], dtype=np.uint8)
+
+      # # 使用 bytes 函数将 uint8array 转换为字符串
+      # string = bytes(uint8array).decode("utf-8")
+
+      # print(string)  # 输出 "Hello"
+
+      # reString = bytes(postBody).decode("utf-8")
+      # print('string===', reString)
+
+      user = user_pb2.User()
+      
+      user.ParseFromString(postBody)
+
+      print(user)
+      
+      # pbStringResponse = json_format.Parse(json.dumps(postBody), user_pb2.User())
+      # print(pbStringResponse)
+
+      # pbStringResponse = user.ParseFromString(json_result['data'])
+      # print(pbStringResponse)
+
+      result = user_pb2.User()
+
+      result.name = 'Tom'
+      result.age = 18
+      #序列化
+      serializeToString = result.SerializeToString()
+      return HttpResponse(serializeToString, status=200)
   return HttpResponse( "No Request", status=404)
